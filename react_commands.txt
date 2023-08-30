@@ -1,0 +1,11 @@
+
+#commands 
+
+# creation of new applications
+npx create-react-app [project_name]
+
+# Start application
+npm start 
+
+#Uses the parameter props to pass values between components
+
