@@ -15,13 +15,28 @@ function App() {
     {rowNumber: 5, rowDescription: 'Task 456', rowAssigned: 'User five'}
   ])
 
-  const addTodo = () => {
+  const addTodo_old = () => {
     if(todos.length > 0){
       const newTodo = {
         rowNumber: todos.length + 1,
-        rowDescription: 'Task ' + (todos.length + 1),
-        rowAssigned: 'User ' + (todos.length + 1)
+        rowDescription: 'description',
+        rowAssigned: 'assigned'
       };
+      console.log(newTodo);
+      setTodos(todos => [...todos, newTodo]);
+      //todos.push(newTodo);
+      console.log(todos);
+    }
+  }
+
+  const addTodo = (description, assigned) => {
+    if(todos.length > 0){
+      const newTodo = {
+        rowNumber: todos.length + 1,
+        rowDescription: description,
+        rowAssigned: assigned
+      };
+      console.log(newTodo);
       setTodos(todos => [...todos, newTodo]);
       //todos.push(newTodo);
       console.log(todos);
@@ -36,8 +51,8 @@ function App() {
         </div>
         <div className='card-body'>
           <TodoTable todos={todos}/>
-          <button className='btn btn-primary' onClick={addTodo}>add new todo</button>
-          <NewTodoForm/>
+          <button className='btn btn-primary' onClick={addTodo_old} >add new todo</button>
+          <NewTodoForm addTodo={addTodo} />
        </div>
       </div>
     </div>
