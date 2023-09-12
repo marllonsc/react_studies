@@ -9,3 +9,49 @@ npm start
 
 #Uses the parameter props to pass values between components
 
+#For Example on page 
+
+{todos.map(todo =>(
+                <TodoRowItem rowNumber={todo.rowNumber} 
+                rowDescription={todo.rowDescription} 
+                rowAssigned={todo.rowAssigned}/>
+            ))}
+
+
+#form Example 
+
+<div className="mt-5">
+            <form>
+                <div className="mb-3">
+                    <label className="form-label">Assigned</label>
+                    <input type='text' className='form-control' required
+                    onChange={e => setAssigned(e.target.value)}
+                        value={assigned}>
+                    </input>
+                </div>
+                <div className="mb-3">
+                    <label className="form-label">Description</label>
+                    <textarea  rows={3} className='form-control' required
+                    onChange={e => setDescription(e.target.value)}
+                        value={description}>
+                    </textarea>
+                </div>
+                <button tyoe='button' className="btn btn-primary mt-3">add Todo</button>
+            </form>
+        </div>
+
+
+#Add a key to each row has unique identify
+
+<TodoRowItem 
+                key={todo.rowNumber}
+                rowNumber={todo.rowNumber} 
+                rowDescription={todo.rowDescription} 
+                rowAssigned={todo.rowAssigned}/>
+            ))}
+
+
+#to call on click on html 
+
+onClick={() => props.deleteTodo(props.rowNumber)}
+<button className='btn btn-primary' onClick={() => props.deleteTodo(props.rowNumber)} >remove</button>

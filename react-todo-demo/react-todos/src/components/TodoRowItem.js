@@ -4,11 +4,21 @@ function TodoRowItem(props){
     const rowDescription = props.rowDescription;
     const rowAssigned = props.rowAssigned;
 
+    const removeTodoMine = () => {
+        const newTodo = {
+            rowNumber: rowNumber,
+            rowDescription: rowDescription,
+            rowAssigned: rowAssigned
+          };
+        props.removeBtn(newTodo);
+    }
+
     return(
-        <tr>
+        <tr >
             <th scope='row'>{rowNumber}</th>
             <td>{rowDescription}</td>
             <td>{rowAssigned}</td>
+            <td><button className='btn btn-primary' onClick={() => props.deleteTodo(props.rowNumber)} >remove</button></td>
         </tr>
     )
 }
