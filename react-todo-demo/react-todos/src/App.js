@@ -70,7 +70,9 @@ function App() {
         </div>
         <div className='card-body'>
           <TodoTable todos={todos} deleteTodo={deleteTodo}/>
-          <button className='btn btn-primary' onClick={() => {setShowAddTodoForm(!showAddTodoForm)}} >{showAddTodoForm ? 'Close New Todo' : 'New Todo'}</button>
+          <button className='btn btn-primary' 
+          onClick={() => {setShowAddTodoForm(!showAddTodoForm)}} >
+            {showAddTodoForm ? 'Close New Todo' : 'New Todo'}</button>
           {showAddTodoForm &&  <NewTodoForm addTodo={addTodo} /> }
          
        </div>

@@ -55,3 +55,7 @@ npm start
 
 onClick={() => props.deleteTodo(props.rowNumber)}
 <button className='btn btn-primary' onClick={() => props.deleteTodo(props.rowNumber)} >remove</button>
+
+
+tsc file.ts to compile to javaScritp
+node file.js to running a file JvaScript
