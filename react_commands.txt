@@ -57,5 +57,20 @@ onClick={() => props.deleteTodo(props.rowNumber)}
 <button className='btn btn-primary' onClick={() => props.deleteTodo(props.rowNumber)} >remove</button>
 
 
-tsc file.ts to compile to javaScritp
-node file.js to running a file JvaScript
+==============================================================================
+TypeScript
+==============================================================================
+
+tsc file.ts  -> to compile to javaScritp
+node file.js -> to running a file JvaScript
+
+#no emit error
+tsc -noEmitOnErro file.ts
+
+tsc --target ES5 files.ts -> set the target to complile the file
+
+tsc --init -> create a json config file to project_name
+
+==============================================================================
+TypeScript
+==============================================================================
