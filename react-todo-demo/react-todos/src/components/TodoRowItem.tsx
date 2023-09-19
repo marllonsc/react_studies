@@ -1,17 +1,24 @@
-function TodoRowItem(props){
+import React from "react";
+
+export const TodoRowItem: React.FC<{
+    rowNumber: number, 
+    rowDescription: string, 
+    rowAssigned: string, 
+    deleteTodo: Function
+}> = (props) => {
 
     const rowNumber = props.rowNumber;
     const rowDescription = props.rowDescription;
     const rowAssigned = props.rowAssigned;
 
-    const removeTodoMine = () => {
+    /*const removeTodoMine = () => {
         const newTodo = {
             rowNumber: rowNumber,
             rowDescription: rowDescription,
             rowAssigned: rowAssigned
           };
         props.removeBtn(newTodo);
-    }
+    }*/
 
     return(
         <tr >
@@ -24,4 +31,3 @@ function TodoRowItem(props){
     )
 }
 
-export default TodoRowItem

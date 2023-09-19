@@ -1,20 +1,20 @@
 //import logo from './logo.svg';
 import './App.css';
 import React, {useState} from 'react';
-import TodoTable from './components/TodoTable';
-import NewTodoForm from './components/newTodoForm';
+import {TodoTable} from './components/TodoTable';
+import {NewTodoForm} from './components/newTodoForm';
 
-function App() {
+export const  App = () => {
 
   const[showAddTodoForm, setShowAddTodoForm] = useState(false);
 
 
   const [todos, setTodos] = useState([
-    {rowNumber: 1, rowDescription: 'Task 1', rowAssigned: 'User one'},
-    {rowNumber: 2, rowDescription: 'Task  2', rowAssigned: 'User two'},
-    {rowNumber: 3, rowDescription: 'Task 3', rowAssigned: 'User three'},
-    {rowNumber: 4, rowDescription: 'Task 51', rowAssigned: 'User four'},
-    {rowNumber: 5, rowDescription: 'Task 456', rowAssigned: 'User five'}
+    {rowNumber: 1, rowDescription: 'Task 1', rowAssign: 'User one'},
+    {rowNumber: 2, rowDescription: 'Task  2', rowAssign: 'User two'},
+    {rowNumber: 3, rowDescription: 'Task 3', rowAssign: 'User three'},
+    {rowNumber: 4, rowDescription: 'Task 51', rowAssign: 'User four'},
+    {rowNumber: 5, rowDescription: 'Task 456', rowAssign: 'User five'}
   ])
 
   const addTodo_old = () => {
@@ -22,7 +22,7 @@ function App() {
       const newTodo = {
         rowNumber: todos.length + 1,
         rowDescription: 'description',
-        rowAssigned: 'assigned'
+        rowAssign: 'assigned'
       };
       console.log(newTodo);
       setTodos(todos => [...todos, newTodo]);
@@ -31,7 +31,7 @@ function App() {
     }
   }
 
-  const addTodo = (description, assigned) => {
+  const addTodo = (description: string, assign:string ) => {
     let rowNumber = 0;
     if(todos.length > 0){
       rowNumber = todos[todos.length -1].rowNumber +1; 
@@ -41,7 +41,7 @@ function App() {
       const newTodo = {
         rowNumber: rowNumber,
         rowDescription: description,
-        rowAssigned: assigned
+        rowAssign: assign
       };
       console.log(newTodo);
       setTodos(todos => [...todos, newTodo]);
@@ -50,7 +50,7 @@ function App() {
     
   }
 
-  const deleteTodo = (deleteTodoRowNumber) => {
+  const deleteTodo = (deleteTodoRowNumber: number) => {
     let filtered = todos.filter(function (value) {
       return value.rowNumber !== deleteTodoRowNumber
     });
@@ -58,9 +58,9 @@ function App() {
   }
 
 
-  const removeTodoMine = (todo) => {
-    todos.reduce(todo);
-  }
+  //const removeTodoMine = (todo) => {
+    //todos.reduce(todo);
+  //}
 
   return (
     <div className='mt-5 container'>
@@ -81,4 +81,3 @@ function App() {
   );
 }
 
-export default App;
