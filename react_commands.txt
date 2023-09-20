@@ -74,3 +74,15 @@ tsc --init -> create a json config file to project_name
 ==============================================================================
 TypeScript
 ==============================================================================
+
+
+npm install --save typescript @types/node @tyoes/react @types/react-dom @types/jest
+
+npx tsc --init
+
+
+==============================================================================
+Create a React Project using typeScript
+==============================================================================
+
+npx create-react-app libray-app --template typescript
