@@ -9,4 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface BookRepository extends JpaRepository<Book, Long> {
 
     Page<Book> findByTitleContaining(@RequestParam("Title") String title, Pageable pageable);
+
+    Page<Book> findByCategoryContaining(@RequestParam("Category") String category, Pageable pageable);
 }
