@@ -86,3 +86,10 @@ Create a React Project using typeScript
 ==============================================================================
 
 npx create-react-app libray-app --template typescript
+
+
+==============================================================================
+Create a React Route
+==============================================================================
+
+npm install react-router-dom@5

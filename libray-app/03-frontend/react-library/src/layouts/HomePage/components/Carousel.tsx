@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import BookModel from "../../../models/BookModels";
 import { forEachChild } from "typescript";
 import { SpinnerLoading } from "../../Utils/SpinnerLoading";
+import { Link } from "react-router-dom";
 
 export const Carousel = () => {
 
@@ -10,13 +11,16 @@ export const Carousel = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [httpError, setHttpError] = useState(null);
 
+    const ip_linux_virtual = "http://192.168.49.2:30291/";
+    const ip_linux = "http://192.168.58.2:31529/";
+
     useEffect(() => {
       const fetchBooks = async () => {
-          const baseUrl: string = "http://192.168.49.2:30291/api/books";
+          const baseUrl: string = ip_linux+"api/books";
 
           const url: string = `${baseUrl}?page=0&size=9`;
 
-          const response = await fetch(url);
+          const response = await fetch(url, {mode:'cors'});
 
           if(!response.ok){
             throw new Error('Something went wrong!');
@@ -141,9 +145,9 @@ export const Carousel = () => {
             </div>
           </div>
           <div className="homepage-carousel-title mt-3">
-            <a className="btn btn-outline-secondary btn-lg" href="#">
+            <Link className="btn btn-outline-secondary btn-lg" to="/search">
               View More
-            </a>
+            </Link>
           </div>
       </div>
     
