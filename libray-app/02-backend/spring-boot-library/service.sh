@@ -1,7 +1,7 @@
 # Run on first time only -------------------------------------------------------------------------
 echo "Service Starting"
 echo ""
-kubectl delete service pring-boot-library
+#kubectl delete service pring-boot-library
 echo ""
 
 kubectl expose pod pring-boot-library --type=NodePort --port=8080 --target-port=8080 --name=pring-boot-library
