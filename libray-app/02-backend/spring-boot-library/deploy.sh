@@ -13,7 +13,7 @@ echo ""
 docker build -t spring-boot-library:0.0.1 .
 echo ""
 
-kubectl delete pod pring-boot-library
+#kubectl delete pod pring-boot-library
 
 kubectl run spring-boot-library --image=spring-boot-library:0.0.1 --image-pull-policy=Never
 
