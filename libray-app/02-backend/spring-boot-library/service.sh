@@ -1,13 +1,13 @@
 # Run on first time only -------------------------------------------------------------------------
 echo "Service Starting"
 echo ""
-#kubectl delete service pring-boot-library
+#kubectl delete service spring-boot-library
 echo ""
 
-kubectl expose pod pring-boot-library --type=NodePort --port=8080 --target-port=8080 --name=pring-boot-library
+kubectl expose pod spring-boot-library --type=NodePort --port=8080 --target-port=8080 --name=spring-boot-library
 echo ""
 
-minikube service pring-boot-library --url
+minikube service spring-boot-library --url
 echo ""
 echo ""
 
