@@ -1,4 +1,4 @@
-echo "Deployment Start  pring-boot-library >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.!"
+echo "Deployment Start  Spring-boot-library >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.!"
 echo ""
 
 mvn clean install
@@ -10,14 +10,14 @@ echo ""
 minikube docker-env | Invoke-Expression
 echo ""
 
-docker build -t pring-boot-library:0.0.1 .
+docker build -t spring-boot-library:0.0.1 .
 echo ""
 
-kubectl delete pod pring-boot-library
+#kubectl delete pod pring-boot-library
 
-kubectl run pring-boot-library --image=pring-boot-library:0.0.1 --image-pull-policy=Never
+kubectl run spring-boot-library --image=spring-boot-library:0.0.1 --image-pull-policy=Never
 
-minikube service pring-boot-library --url
+minikube service spring-boot-library --url
 
 echo ""
 echo ""

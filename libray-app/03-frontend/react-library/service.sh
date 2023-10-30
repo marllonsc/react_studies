@@ -1,13 +1,13 @@
 # Run on first time only -------------------------------------------------------------------------
 echo "Service Starting"
 echo ""
-#kubectl delete service spring-boot-library
+kubectl delete service react-library
 echo ""
 
-kubectl expose pod spring-boot-library --type=NodePort --port=8080 --target-port=8080 --name=spring-boot-library
+kubectl expose pod react-library --type=NodePort --port=80 --target-port=80 --protocol=TCP --name=react-library
 echo ""
 
-minikube service spring-boot-library --url
+minikube service react-library --url
 echo ""
 echo ""
 

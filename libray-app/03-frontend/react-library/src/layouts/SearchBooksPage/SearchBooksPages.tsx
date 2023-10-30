@@ -17,11 +17,13 @@ export const SearchBooksPages = () => {
     const [searchUrl, setSearchUrl] = useState('');
     const [categorySelection, setCategorySelection] = useState('Book Category');
 
+    const ip_linux_virtual = "http://192.168.49.2:30291/";
+    const ip_linux = "http://192.168.58.2:31529/";
 
 
     useEffect(() => {
         const fetchBooks = async () => {
-            const baseUrl: string = "http://192.168.49.2:30979/api/books";
+            const baseUrl: string = ip_linux+"api/books";
   
             let url: string = '';
 
@@ -32,7 +34,7 @@ export const SearchBooksPages = () => {
               url = baseUrl + searchWithPage;
             }
   
-            const response = await fetch(url);
+            const response = await fetch(url, {mode:'cors'});
   
             if(!response.ok){
               throw new Error('Something went wrong!');
