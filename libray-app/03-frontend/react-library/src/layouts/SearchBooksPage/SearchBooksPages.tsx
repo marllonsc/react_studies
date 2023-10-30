@@ -17,13 +17,13 @@ export const SearchBooksPages = () => {
     const [searchUrl, setSearchUrl] = useState('');
     const [categorySelection, setCategorySelection] = useState('Book Category');
 
-    const ip_linux_virtual = "http://192.168.49.2:30291/";
+    const ip_linux_virtual = "http://192.168.49.2:30979/";
     const ip_linux = "http://192.168.58.2:31529/";
 
 
     useEffect(() => {
         const fetchBooks = async () => {
-            const baseUrl: string = ip_linux+"api/books";
+            const baseUrl: string = ip_linux_virtual+"api/books";
   
             let url: string = '';
 

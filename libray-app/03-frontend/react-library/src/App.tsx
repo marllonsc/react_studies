@@ -7,6 +7,7 @@ import { SearchBook } from './layouts/SearchBooksPage/components/SeachBook';
 import { SearchBooksPages } from './layouts/SearchBooksPage/SearchBooksPages';
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import ReactSwitch from 'react-switch';
+import { BookCheckoutPage } from './layouts/BookkCheckoutPage/BookCheckoutPage';
 
 export const  App = () => {
   return (
@@ -20,6 +21,8 @@ export const  App = () => {
           <Route path="/home" element={<HomePage />} />
 
           <Route  path="/search" element={<SearchBooksPages />} />
+
+          <Route  path="/checkout/:bookId" element={<BookCheckoutPage />} />
 
         </Routes> 
 
