@@ -5,6 +5,7 @@ import { StarReview } from "../Utils/StarReview";
 import { CheckoutAndReviewBox } from "./CheckoutAndReviewBox";
 import ReviewModel from "../../models/ReviewModel";
 import { error } from "console";
+import { LatestReviews } from "./LatestReviews";
 
 export const BookCheckoutPage = () => {
 
@@ -135,12 +136,13 @@ export const BookCheckoutPage = () => {
                             <h2>{book?.title}</h2>
                             <h5 className="text-primary">{book?.author}</h5>
                             <p className="lead">{book?.description}</p>
-                            <StarReview rating={2.5} size={32}></StarReview>
+                            <StarReview rating={totalStars} size={32}></StarReview>
                         </div>
                     </div>
                     <CheckoutAndReviewBox book={book} mobile={false}></CheckoutAndReviewBox>
                 </div>
                 <hr></hr>
+                <LatestReviews reviews={reviews} bookId={book?.id} mobile={false}></LatestReviews>
             </div>
             <div className="container d-lg-none mt-5">
                 <div className="d-flex justify-content-center align-items-center">
@@ -155,11 +157,12 @@ export const BookCheckoutPage = () => {
                         <h2>{book?.title}</h2>
                         <h5 className="text-primary">{book?.author}</h5>
                         <p className="lead">{book?.description}</p>
-                        <StarReview rating={2.5} size={32}></StarReview>
+                        <StarReview rating={totalStars} size={32}></StarReview>
                     </div>
                 </div>
                 <CheckoutAndReviewBox book={book} mobile={true}></CheckoutAndReviewBox>
                 <hr></hr>
+                <LatestReviews reviews={reviews } bookId={book?.id} mobile={true}></LatestReviews>
             </div>
         </div >
     );
