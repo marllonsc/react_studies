@@ -93,3 +93,15 @@ Create a React Route
 ==============================================================================
 
 npm install react-router-dom@5
+
+
+==============================================================================
+Autentication
+==============================================================================
+
+https://www.okta.com/ 
+
+developer.okta.com
+
+instal okta => npm install @okta/okta-signin-widget@6.3.3
+               npm install @okta/okta-react@6.4.3
