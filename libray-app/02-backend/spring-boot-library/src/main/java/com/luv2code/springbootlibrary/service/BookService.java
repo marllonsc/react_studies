@@ -22,7 +22,6 @@ public class BookService {
 	
 	private CheckoutRepository checkoutRepository;
 	
-	@Autowired
 	public BookService(BookRepository bookRepository, CheckoutRepository checkoutRepository) {
 		this.bookRepository = bookRepository;
 		this.checkoutRepository = checkoutRepository;
@@ -32,7 +31,7 @@ public class BookService {
 		Optional<Book> book = bookRepository.findById(bookid);
 		
 		Checkout validateCheckout =  checkoutRepository.findByUserEmailAndBookId(userEmail, bookid);
-		
+		 
 		if(!book.isPresent() || validateCheckout != null || book.get().getCopiesAvailable() <= 0) {
 			throw new Exception("Book does't exist or already checked out by user");
 		}
