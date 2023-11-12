@@ -3,9 +3,7 @@ package com.luv2code.springbootlibrary.service;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import javax.swing.tree.ExpandVetoException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,5 +45,16 @@ public class BookService {
 		
 		return book.get();
 		
+	}
+	
+	
+	public Boolean checkoutBookByUser(String userEmail, Long bookId) {
+		Checkout validateCheckout = checkoutRepository.findByUserEmailAndBookId(userEmail, bookId);
+		
+		if(validateCheckout != null) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 }
