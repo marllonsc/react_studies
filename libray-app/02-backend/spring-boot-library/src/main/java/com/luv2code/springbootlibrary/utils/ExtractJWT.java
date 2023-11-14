@@ -23,7 +23,7 @@ public class ExtractJWT {
 
 			if (keyValue[0].equals("\"sub\"")) {
 
-				int remove = 1;
+				int remove = 2;
 				if (keyValue[0].equals("}")) {
 					remove = 2;
 				}
