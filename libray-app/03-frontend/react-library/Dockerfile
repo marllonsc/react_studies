@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build
 
 # Expose port 80 to the outside world
-EXPOSE 80
+EXPOSE 8081
 
 # Define environment variable
 ENV REACT_APP_API_URL=http://api.library.com
