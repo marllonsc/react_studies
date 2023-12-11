@@ -12,7 +12,7 @@ export const Carousel = () => {
     const [httpError, setHttpError] = useState(null);
 
     const ip_linux_virtual = "http://192.168.49.2:30979/";
-    const ip_linux = "http://192.168.0.102:8083/";
+    const ip_linux = "http://192.168.0.105:8083/";
 
     useEffect(() => {
       const fetchBooks = async () => {
