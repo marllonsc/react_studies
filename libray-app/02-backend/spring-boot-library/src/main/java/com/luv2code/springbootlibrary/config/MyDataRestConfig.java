@@ -1,6 +1,7 @@
 package com.luv2code.springbootlibrary.config;
 
 import com.luv2code.springbootlibrary.entity.Book;
+import com.luv2code.springbootlibrary.entity.Checkout;
 import com.luv2code.springbootlibrary.entity.Review;
 
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,7 @@ public class MyDataRestConfig  implements RepositoryRestConfigurer {
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors){
 
         HttpMethod[] theUnsupportedActions = {
+        		HttpMethod.GET,
                 HttpMethod.DELETE,
                 HttpMethod.PUT,
                 HttpMethod.PATCH,
@@ -28,9 +30,11 @@ public class MyDataRestConfig  implements RepositoryRestConfigurer {
 
         config.exposeIdsFor(Book.class);
         config.exposeIdsFor(Review.class);
+        config.exposeIdsFor(Checkout.class);
 
         disableHttpMethods(Book.class, config, theUnsupportedActions);
         disableHttpMethods2(Review.class, config, theUnsupportedActions);
+        disableHttpMethods3(Checkout.class, config, theUnsupportedActions);
 
         /* Config Cors Mapping*/
 
@@ -52,6 +56,13 @@ public class MyDataRestConfig  implements RepositoryRestConfigurer {
 	private void disableHttpMethods(Class<Book> bookClass, RepositoryRestConfiguration config, HttpMethod[] theUnsupportedActions) {
 
         config.getExposureConfiguration().forDomainType(bookClass)
+                .withAssociationExposure((metdata,httpMethods) -> httpMethods.disable(theUnsupportedActions))
+                .withCollectionExposure((metdata,httpMethods) -> httpMethods.disable(theUnsupportedActions));
+    }
+	
+	private void disableHttpMethods3(Class<Checkout> checkout, RepositoryRestConfiguration config, HttpMethod[] theUnsupportedActions) {
+
+        config.getExposureConfiguration().forDomainType(checkout)
                 .withAssociationExposure((metdata,httpMethods) -> httpMethods.disable(theUnsupportedActions))
                 .withCollectionExposure((metdata,httpMethods) -> httpMethods.disable(theUnsupportedActions));
     }
