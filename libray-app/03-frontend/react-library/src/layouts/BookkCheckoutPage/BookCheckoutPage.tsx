@@ -148,7 +148,7 @@ export const BookCheckoutPage = () => {
     useEffect (() => {
         const fetchUserCheckedOutBook = async () => {
             if(authState && authState.isAuthenticated) {
-                const url = `${ip_linux}api/books/secure/ischeckedout/byuser/?bookId=${bookId}`;
+                const url = `${ip_linux}api/books/secure/ischeckedout/byuser?bookId=${bookId}`;
                 const requestOptions = {
                     method: 'GET',
                     headers: {
