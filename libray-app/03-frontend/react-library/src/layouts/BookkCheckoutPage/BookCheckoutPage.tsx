@@ -25,6 +25,10 @@ export const BookCheckoutPage = () => {
     const [currentLoansCount, setCurrentLoansCount] = useState(0);
     const [isLoadingCurrentLoansCount, setIsLoadingCurrentLoansCount] = useState(true);
 
+    // Is Book check Out
+    const [isCheckedOut, setIsCheckedOut] = useState(false);
+    const [isLoadingBookCheckedOut, setIsLoadingBookCheckedOut] = useState(true);
+
     const bookId = (window.location.pathname).split('/')[2];
 
     const ip_linux_virtual = "http://192.168.49.2:30979/";
@@ -141,7 +145,35 @@ export const BookCheckoutPage = () => {
         })
     }, [authState])
 
-    if (isLoading || isLoadingReview || isLoadingCurrentLoansCount) {
+    useEffect (() => {
+        const fetchUserCheckedOutBook = async () => {
+            if(authState && authState.isAuthenticated) {
+                const url = `${ip_linux}api/books/secure/ischeckedout/byuser/?bookId=${bookId}`;
+                const requestOptions = {
+                    method: 'GET',
+                    headers: {
+                        Authorization: `Bearer ${authState.accessToken?.accessToken}`,
+                        'Content-Type':'application/json'
+                    } 
+                };
+                const bookCheckOut = await fetch(url, requestOptions);
+
+                if(!bookCheckOut.ok){
+                    throw new Error('Something went wrong!');
+                }
+
+                const bookCheckoutResponseJson = await bookCheckOut.json();
+                setIsCheckedOut(bookCheckoutResponseJson);
+            }
+        }
+
+        fetchUserCheckedOutBook().catch((error: any) => {
+            setIsLoadingBookCheckedOut(false);
+            setHttpError(error.message);
+        })
+    }, [authState]);
+
+    if (isLoading || isLoadingReview || isLoadingCurrentLoansCount || isLoadingBookCheckedOut) {
         return (
             <SpinnerLoading></SpinnerLoading>
         )
