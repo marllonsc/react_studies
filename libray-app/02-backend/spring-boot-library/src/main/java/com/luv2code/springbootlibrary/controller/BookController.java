@@ -14,7 +14,7 @@ import com.luv2code.springbootlibrary.service.BookService;
 import com.luv2code.springbootlibrary.utils.ExtractJWT;
 
 //@CrossOrigin("http://localhost:3000")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowedHeaders = {"Authorization", "Content-Type"})
 @RestController
 @RequestMapping("/api/books")
 public class BookController {
