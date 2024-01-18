@@ -1,0 +1,51 @@
+package com.luv2code.springbootlibrary.service;
+
+
+import java.time.LocalDate;
+import java.util.Date;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.luv2code.springbootlibrary.dao.BookRepository;
+import com.luv2code.springbootlibrary.dao.ReviewRepository;
+import com.luv2code.springbootlibrary.entity.Review;
+import com.luv2code.springbootlibrary.requestmodels.ReviewRequest;
+
+@Service
+@Transactional
+public class ReviewService {
+
+	private BookRepository bookRepository;
+	
+	private ReviewRepository reviewRepository;
+
+	@Autowired
+	public ReviewService(BookRepository bookRepository, ReviewRepository reviewRepository) {
+		super();
+		this.bookRepository = bookRepository;
+		this.reviewRepository = reviewRepository;
+	}
+	
+	public void postReview(String userEmail, ReviewRequest reviewRequest) throws Exception {
+		
+		Review validateReview = reviewRepository.findByUserEmailAndBookId(userEmail, reviewRequest.getBookId());
+		
+		if(validateReview != null) {
+			throw new Exception("Review already created");
+		}
+		
+		Review review = new Review();
+		review.setBookId(reviewRequest.getBookId());
+		review.setRating(reviewRequest.getRating());
+		review.setUserEmail(userEmail);
+
+		if(reviewRequest.getReviewDescription().isPresent()){
+			review.setReviewDescription(reviewRequest.getReviewDescription().map(Object::toString).orElse(null));
+		}
+		review.setDate(new Date());
+		reviewRepository.save(review);
+	}
+		
+}
