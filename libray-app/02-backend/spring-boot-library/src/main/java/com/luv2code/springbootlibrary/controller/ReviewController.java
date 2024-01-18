@@ -12,7 +12,7 @@ import com.luv2code.springbootlibrary.requestmodels.ReviewRequest;
 import com.luv2code.springbootlibrary.service.ReviewService;
 import com.luv2code.springbootlibrary.utils.ExtractJWT;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/reviews")
 public class ReviewController {

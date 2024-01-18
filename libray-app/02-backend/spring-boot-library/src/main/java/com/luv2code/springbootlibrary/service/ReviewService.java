@@ -2,7 +2,7 @@ package com.luv2code.springbootlibrary.service;
 
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.sql.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,7 +44,7 @@ public class ReviewService {
 		if(reviewRequest.getReviewDescription().isPresent()){
 			review.setReviewDescription(reviewRequest.getReviewDescription().map(Object::toString).orElse(null));
 		}
-		review.setDate(new Date());
+		review.setDate(Date.valueOf(LocalDate.now()));
 		reviewRepository.save(review);
 	}
 		
