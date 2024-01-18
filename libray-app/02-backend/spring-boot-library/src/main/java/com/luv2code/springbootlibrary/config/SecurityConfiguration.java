@@ -17,31 +17,28 @@ import com.okta.spring.boot.oauth.Okta;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
-	
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		
-		//Disable Cross site Request forgery
+
+		// Disable Cross site Request forgery
 		http.csrf().disable();
-		
+
 		// Protect endpoints at /api/<type>/secure
-		http.authorizeRequests(configurer -> configurer.requestMatchers("/api/books/secure/**").authenticated())
-		.oauth2ResourceServer().jwt();
-		
-		//add CORS filters
+		http.authorizeRequests(configurer -> configurer.requestMatchers("/api/books/secure/**",
+				"/api/reviews/secure/**").authenticated())
+				.oauth2ResourceServer().jwt();
+
+		// add CORS filters
 		http.cors();
-		
-		//add content negotiation strategy
+
+		// add content negotiation strategy
 		http.setSharedObject(ContentNegotiationStrategy.class, new HeaderContentNegotiationStrategy());
-		
-		
-		//	Force a now-empty response body for 401's to meake the response friendly
+
+		// Force a now-empty response body for 401's to meake the response friendly
 		Okta.configureResourceServer401ResponseBody(http);
-		
+
 		return http.build();
 	}
-
-
 
 }
