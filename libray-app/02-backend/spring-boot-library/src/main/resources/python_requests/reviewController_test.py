@@ -39,7 +39,7 @@ print("Starting GET Test")
 
 # Set the query parameters
 params = {
-    "bookId": 2
+    "bookId": 1
 }
 
 # Make the GET request

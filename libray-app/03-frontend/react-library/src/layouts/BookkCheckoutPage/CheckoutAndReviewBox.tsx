@@ -1,22 +1,37 @@
 import { Link } from "react-router-dom";
 import BookModel from "../../models/BookModels";
+import { LeaveAReview } from "../Utils/LeaveAReview";
 
-export const CheckoutAndReviewBox: React.FC<{ book: BookModel | undefined, mobile: boolean, currentLoansCount: number
-    , isAuthenticated: any, isCheckedOut: boolean, checkoutBook: any }> = (props) => {
+export const CheckoutAndReviewBox: React.FC<{
+    book: BookModel | undefined, mobile: boolean, currentLoansCount: number
+    , isAuthenticated: any, isCheckedOut: boolean, checkoutBook: any
+    , isReviewLeft: boolean, submitReview: any
+}> = (props) => {
 
     function buttonRender() {
-        if(props.isAuthenticated){
-            if(!props.isCheckedOut && props.currentLoansCount < 5){
+        if (props.isAuthenticated) {
+            if (!props.isCheckedOut && props.currentLoansCount < 5) {
                 return (<button onClick={() => props.checkoutBook()} className="btn btn-success btn-lg">Checkout</button>)
-            }else if(props.isCheckedOut){
+            } else if (props.isCheckedOut) {
                 return (<p><b>Book checked out. Enjoy</b></p>)
-            }else if(!props.isCheckedOut) {
+            } else if (!props.isCheckedOut) {
                 return (<p className="text-danger">Too many books checked out.</p>)
             }
         }
 
         return (<Link to={'/login'} className="btn btn-success btn-lg">Sing in</Link>)
     }
+
+    function reviewRender() {
+        if (props.isAuthenticated && !props.isReviewLeft) {
+            return (<LeaveAReview submitReview={props.submitReview}></LeaveAReview>)
+        } else if (props.isAuthenticated && props.isReviewLeft) {
+            return (<p><b>Thank you for your review!</b></p>)
+        }
+
+        return (<div><hr></hr><p>Sing in to be able to leave a review.</p></div>)
+    }
+
 
     return (
         <div className={props.mobile ? 'card d-felex mt-5' : ' card col-3 container d-flex mb-5'}>
@@ -53,9 +68,7 @@ export const CheckoutAndReviewBox: React.FC<{ book: BookModel | undefined, mobil
                 <p className="mt-3">
                     This number can change until placing order has been complete.
                 </p>
-                <p>
-                    Sign in to be able to leave a review.
-                </p>
+               {reviewRender()}
             </div>
         </div>
     );
