@@ -18,8 +18,8 @@ export const SearchBooksPages = () => {
     const [categorySelection, setCategorySelection] = useState('Book Category');
 
     const ip_linux_virtual = "http://192.168.49.2:30979/";
-    const ip_linux = "http://localhost:8080/";
-    // const ip_linux = "http://192.168.0.104:8083/";
+    // const ip_linux = "http://localhost:8080/";
+     const ip_linux = "http://192.168.0.104:8083/";
 
 
     useEffect(() => {
