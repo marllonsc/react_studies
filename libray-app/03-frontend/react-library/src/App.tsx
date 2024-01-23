@@ -5,20 +5,22 @@ import { Footer } from './layouts/NavbarAndfooter/Footer';
 import { HomePage } from './layouts/HomePage/HomePage';
 import { SearchBook } from './layouts/SearchBooksPage/components/SeachBook';
 import { SearchBooksPages } from './layouts/SearchBooksPage/SearchBooksPages';
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import ReactSwitch from 'react-switch';
 import { BookCheckoutPage } from './layouts/BookkCheckoutPage/BookCheckoutPage';
 import { oktaConfig } from './lib/oktaConfig';
 import { OktaAuth } from '@okta/okta-auth-js';
-import { Security, SecureRoute, LoginCallback } from '@okta/okta-react';
+import { Security, SecureRoute, LoginCallback, useOktaAuth } from '@okta/okta-react';
 import LoginWidget from './Auth/LoginWidget';
 import { ReviewListPage } from './layouts/BookkCheckoutPage/ReviewListPage/ReviewListPage';
+import { ShelfPage } from './layouts/ShelfPage/ShelfPage';
 
 
 
 const oktaAuth = new OktaAuth(oktaConfig);
 
 export const App = () => {
+
 
   const navigate = useNavigate();
 
@@ -33,6 +35,8 @@ export const App = () => {
     navigate('/', { replace: true });
   }
 
+  let token = oktaAuth.getIdToken();
+  
   return (
     <div className='d-flex flex-column min-vh-100'>
 
@@ -51,7 +55,7 @@ export const App = () => {
 
             <Route path="/search" element={<SearchBooksPages />} />
 
-            <Route path='/reviewList/:bookId' element={<ReviewListPage/>} />
+            <Route path='/reviewList/:bookId' element={<ReviewListPage />} />
 
             <Route path="/checkout/:bookId" element={<BookCheckoutPage />} />
 
@@ -59,7 +63,11 @@ export const App = () => {
 
             <Route path="/login/callback" element={<LoginWidget config={LoginCallback} />} />
 
+            <Route path="/shelf"  element={token != null ? <ShelfPage /> : <LoginWidget config={oktaConfig} />} />
+
           </Routes>
+
+
 
         </div>
         <Footer></Footer>
