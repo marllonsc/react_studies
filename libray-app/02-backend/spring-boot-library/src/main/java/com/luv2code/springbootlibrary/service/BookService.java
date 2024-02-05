@@ -23,53 +23,52 @@ import com.nimbusds.oauth2.sdk.util.date.SimpleDate;
 public class BookService {
 
 	private BookRepository bookRepository;
-	
+
 	private CheckoutRepository checkoutRepository;
-	
+
 	public BookService(BookRepository bookRepository, CheckoutRepository checkoutRepository) {
 		this.bookRepository = bookRepository;
 		this.checkoutRepository = checkoutRepository;
 	}
-	
+
 	public Book checkoutBook(String userEmail, Long bookid) throws Exception {
 		Optional<Book> book = bookRepository.findById(bookid);
-		
-		Checkout validateCheckout =  checkoutRepository.findByUserEmailAndBookId(userEmail, bookid);
-		 
-		if(!book.isPresent() || validateCheckout != null || book.get().getCopiesAvailable() <= 0) {
+
+		Checkout validateCheckout = checkoutRepository.findByUserEmailAndBookId(userEmail, bookid);
+
+		if (!book.isPresent() || validateCheckout != null || book.get().getCopiesAvailable() <= 0) {
 			throw new Exception("Book does't exist or already checked out by user");
 		}
-		
+
 		book.get().setCopiesAvailable(book.get().getCopiesAvailable() - 1);
-		
+
 		bookRepository.save(book.get());
-		
-		Checkout checkout = new Checkout(userEmail, LocalDate.now().toString() ,LocalDate.now().plusDays(7).toString(), book.get().getId());
-		
-		
+
+		Checkout checkout = new Checkout(userEmail, LocalDate.now().toString(), LocalDate.now().plusDays(7).toString(),
+				book.get().getId());
+
 		checkoutRepository.save(checkout);
-		
+
 		return book.get();
-		
+
 	}
-	
-	
+
 	public Boolean checkoutBookByUser(String userEmail, Long bookId) {
 		Checkout validateCheckout = checkoutRepository.findByUserEmailAndBookId(userEmail, bookId);
-		
-		if(validateCheckout != null) {
+
+		if (validateCheckout != null) {
 			return true;
-		}else {
+		} else {
 			return false;
 		}
 	}
-	
+
 	public int currentLoansCount(String userEmail) {
 		return checkoutRepository.findBooksByUserEmail(userEmail).size();
 	}
 
 	public List<ShelfCurrentLoansResponse> currentLoans(String userEmail) throws Exception {
-		
+
 		List<ShelfCurrentLoansResponse> shelfCurrentLoansResponses = new ArrayList<>();
 
 		List<Checkout> checkoutList = checkoutRepository.findBooksByUserEmail(userEmail);
@@ -86,7 +85,7 @@ public class BookService {
 		for (Book book : books) {
 			Optional<Checkout> checkout = checkoutList.stream().filter(x -> x.getBookId() == book.getId()).findFirst();
 
-			if(checkout.isPresent()){
+			if (checkout.isPresent()) {
 				Date d1 = sdf.parse(checkout.get().getReturnDate());
 				Date d2 = sdf.parse(LocalDate.now().toString());
 
@@ -100,5 +99,20 @@ public class BookService {
 
 		return shelfCurrentLoansResponses;
 
+	}
+
+	public void returnBook(String userEmail, Long bookId) throws Exception {
+		Optional<Book> book = bookRepository.findById(bookId);
+
+		Checkout validateCheckout = checkoutRepository.findByUserEmailAndBookId(userEmail, bookId);
+
+		if (!book.isPresent() || validateCheckout == null) {
+			throw new Exception("Book does not exist or not checked out by user");
+		}
+
+		book.get().setCopiesAvailable(book.get().getCopiesAvailable() + 1);
+
+		bookRepository.save(book.get());
+		checkoutRepository.deleteById(validateCheckout.getId());
 	}
 }
