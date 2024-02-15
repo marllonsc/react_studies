@@ -75,6 +75,23 @@ export const Loans = () => {
         setCheckout(!checkout);
     }
 
+    async function renewLoan(bookId: number) {
+        const url = `${ip_linux}api/books/secure/renew/loan?bookId=${bookId}`;
+        const requestOptions = {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                'Content-Type': 'application/json'
+            }
+        };
+        const returnResponse = await fetch(url, requestOptions);
+        if (!returnResponse.ok) {
+            throw new Error("Something went wrong");
+        }
+        setCheckout(!checkout); 
+        
+    }
+
     return (
         <div>
             <div>
@@ -134,7 +151,7 @@ export const Loans = () => {
                                         </div>
                                     </div>
                                     <hr></hr>
-                                    <LoansModal shelfCurrentLoan={shelfCurrentLoan} mobile={false} returnBook={returnBook}></LoansModal>
+                                    <LoansModal renewLoan={renewLoan} shelfCurrentLoan={shelfCurrentLoan} mobile={false} returnBook={returnBook}></LoansModal>
                                 </div>
                             ))}
 
@@ -209,7 +226,7 @@ export const Loans = () => {
                                     </div>
 
                                     <hr></hr>
-                                    <LoansModal shelfCurrentLoan={shelfCurrentLoan} mobile={true} returnBook={returnBook}></LoansModal>
+                                    <LoansModal  renewLoan={renewLoan} shelfCurrentLoan={shelfCurrentLoan} mobile={true} returnBook={returnBook}></LoansModal>
                                 </div>
                             ))}
 
