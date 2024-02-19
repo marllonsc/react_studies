@@ -1,6 +1,10 @@
+import { useEffect, useState } from "react";
+import { HistoryPage } from "./components/HisoryPage";
 import { Loans } from "./components/Loans";
 
 export const ShelfPage = () => {
+
+    const [historyClick, setHistoryClick] = useState(false);
 
     return (
 
@@ -8,10 +12,10 @@ export const ShelfPage = () => {
             <div className="mt-3">
                 <nav>
                     <div className="nav nav-tabs" id="nav-tav" role="tablist">
-                        <button className="nav-link active" id="nav-loans-tab" data-bs-toggle="tab" data-bs-target="#nav-loans" type="button" role="tab" aria-controls="nav-loans" aria-selected="true">
+                        <button onClick={() => setHistoryClick(false)} className="nav-link active" id="nav-loans-tab" data-bs-toggle="tab" data-bs-target="#nav-loans" type="button" role="tab" aria-controls="nav-loans" aria-selected="true">
                             Loans
                         </button>
-                        <button className="nav-link" id="nav-history-tab" data-bs-toggle="tab" data-bs-target="#nav-history" type="button" role="tab" aria-controls="nav-history" aria-selected="false">
+                        <button onClick={() => setHistoryClick(true)} className="nav-link" id="nav-history-tab" data-bs-toggle="tab" data-bs-target="#nav-history" type="button" role="tab" aria-controls="nav-history" aria-selected="false">
                             Your History
                         </button>
                     </div>
@@ -21,7 +25,8 @@ export const ShelfPage = () => {
                         <Loans/>
                     </div>
                     <div className="tab-pane fade" id="nav-history" role="tabpanel" aria-labelledby="nav-history-tab">
-                        <p>Checkout History</p>
+                        {historyClick ? <HistoryPage/> : <></>}
+                       
                     </div>
                 </div>
             </div>
