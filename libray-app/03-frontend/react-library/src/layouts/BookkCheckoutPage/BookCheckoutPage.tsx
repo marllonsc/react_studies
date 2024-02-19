@@ -36,8 +36,8 @@ export const BookCheckoutPage = () => {
     const bookId = (window.location.pathname).split('/')[2];
 
     const ip_linux_virtual = "http://192.168.49.2:30979/";
-     const ip_linux = "http://192.158.0.107:8083/";
-    //   const ip_linux = "http://192.158.0.107:8083/";
+     const ip_linux = "http://192.158.0.101:8083/";
+    //   const ip_linux = "http://192.158.0.101:8083/";
 
     useEffect(() => {
         const fetchBooks = async () => {

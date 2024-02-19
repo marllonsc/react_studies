@@ -8,8 +8,8 @@ import { LoansModal } from "./LoansModal";
 export const Loans = () => {
 
     const ip_linux_virtual = "http://192.168.49.2:30979/";
-    const ip_linux = "http://192.158.0.107:8083/";
-    //const ip_linux = "http://192.158.0.107:8083/";
+    const ip_linux = "http://192.158.0.101:8083/";
+    //const ip_linux = "http://192.158.0.101:8083/";
 
     const { authState } = useOktaAuth();
     const [httpError, setHttpError] = useState(null);
