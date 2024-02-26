@@ -1,7 +1,7 @@
 import requests
 
 # Replace the URL with your actual endpoint const ip_linux = "http://192.168.0.104:8083/";
-#url = "http://192.168.0.101:8083/api/reviews/secure"
+#url = "http://192.168.0.104:8083/api/reviews/secure"
 #url = "http://192.168.0.104:8083/api/reviews/secure"
 url = "http://192.168.0.104:8083/api/reviews/secure/user/book"
 
