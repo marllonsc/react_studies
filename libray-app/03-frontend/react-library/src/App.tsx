@@ -15,6 +15,7 @@ import LoginWidget from './Auth/LoginWidget';
 import { ReviewListPage } from './layouts/BookkCheckoutPage/ReviewListPage/ReviewListPage';
 import { ShelfPage } from './layouts/ShelfPage/ShelfPage';
 import { MessagePage } from './layouts/MessagesPage/MessagePage';
+import { ManageLibraryPage } from './layouts/ManageLibraryPage/ManageLibraryPage.';
 
 
 
@@ -67,6 +68,9 @@ export const App = () => {
             <Route path="/shelf"  element={token != null ? <ShelfPage /> : <LoginWidget config={oktaConfig} />} />
 
             <Route path="/messages"  element={token != null ? <MessagePage /> : <LoginWidget config={oktaConfig} />} />
+
+            <Route path="/admin"  element={token != null ? <ManageLibraryPage /> : <LoginWidget config={oktaConfig} />} />
+
 
 
           </Routes>

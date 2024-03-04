@@ -2,8 +2,9 @@ import { useOktaAuth } from "@okta/okta-react";
 import { useEffect, useState } from "react";
 import MessageModel from "../../../models/MessageModel";
 import { SpinnerLoading } from "../../Utils/SpinnerLoading";
+import { Pagination } from "../../Utils/Pagination";
 
-export const MEssages = () => {
+export const Messages = () => {
 
     const { authState } = useOktaAuth();
     const [isLoadingMessages, setIsLoadingMessages] = useState(true);
@@ -23,31 +24,31 @@ export const MEssages = () => {
         const fetchUserMessages = async () => {
 
             if (authState && authState.isAuthenticated) {
-                const url = `${ip_linux}api/histories/search/findBooksByUserEmail?userEmail=${authState.accessToken?.claims.sub}&page${currentPage - 1}&size=5`;
+                const url = `${ip_linux}api/messages/search/findByUserEmail?userEmail=${authState.accessToken?.claims.sub}&page${currentPage - 1}&size=5`;
 
                 const requestOptions = {
                     method: 'GET',
                     headers: {
+                        Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
                         'Content-Type': 'application/json'
                     }
                 };
 
                 // need to continue the implementation
-                const historyResponse = await fetch(url, requestOptions);
+                const messagesResponse = await fetch(url, requestOptions);
 
-                if (!historyResponse.ok) {
+                if (!messagesResponse.ok) {
                     throw new Error('Something went wrong!');
                 }
 
-                /*
-                const historyResponseJson = await historyResponse.json();
-                setHistories(historyResponseJson._embedded.histories);
-                setTotalPages(historyResponseJson.page.totalPages);
-                setIsLoadingHistory(false); */
+                
+                const messagesResponseJson = await messagesResponse.json();
+                setMessages(messagesResponseJson._embedded.messages);
+                setTotalPages(messagesResponseJson.page.totalPages);
 
-            } else {
-                //setIsLoadingHistory(false);
-            }
+            } 
+
+            setIsLoadingMessages(false);
 
         }
         fetchUserMessages().catch((error: any) => {
@@ -72,6 +73,38 @@ export const MEssages = () => {
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
     return(
+        <div className="mt-2">
+            {messages.length > 0 ?
+                <>
+                <h5> Current Q/A: </h5>
+                {messages.map(message => (
+                    <div key={message.id}>
+                        <div className="card mt-2 shadow p-3 bg-body rounded">
+                            <h5>Case #{message.id}: {message.title}</h5>
+                            <h6>{message.userEmail}</h6>
+                            <p>{message.question}</p>
+                            <hr></hr>
+                            <div>
+                                <h5>Response: </h5>
+                                {message.response && message.adminEmail? 
+                                    <>
+                                        <h6>{message.adminEmail} (admin)</h6>
+                                        <p>{message.response}</p>
+                                    </>
+                                    :
+                                    <p><i>Pending response from administration. Please be patient</i></p>
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                ))}
+                </>
+                :
+                <h5>All questions you submit will be shown here</h5>    
+            }
+            {totalPages > 1 && <Pagination currentPage={currentPage} totalPages={totalPages} paginate={paginate}></Pagination>}
+        </div>
         
     );
 }
