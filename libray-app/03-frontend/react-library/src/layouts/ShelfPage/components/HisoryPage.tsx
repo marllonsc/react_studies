@@ -8,8 +8,8 @@ import { Pagination } from "../../Utils/Pagination";
 export const HistoryPage = () => {
 
     const ip_linux_virtual = "http://192.168.49.2:30979/";
-    const ip_linux = "http://192.168.0.104:8083/";
-   //   const ip_linux = "http://192.168.0.104:8083/";
+    const ip_linux = "http://192.168.0.101:8083/";
+   //   const ip_linux = "http://192.168.0.101:8083/";
 
     const { authState } = useOktaAuth();
     const [isLoadingHistory, setIsLoadingHistory] = useState(true);
