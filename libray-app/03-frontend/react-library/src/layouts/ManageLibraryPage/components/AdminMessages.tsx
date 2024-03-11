@@ -3,28 +3,32 @@ import { useEffect, useState } from "react";
 import MessageModel from "../../../models/MessageModel";
 import { SpinnerLoading } from "../../Utils/SpinnerLoading";
 import { Pagination } from "../../Utils/Pagination";
+import { AdminMessages } from "./AdminMessage";
 
-export const Messages = () => {
+export const AdminMessage = ()=> {
 
     const { authState } = useOktaAuth();
+
     const [isLoadingMessages, setIsLoadingMessages] = useState(true);
     const [httpError, setHttpError] = useState(null);
 
-    const [messages, setMessages] = useState<MessageModel[]>([]);
-    
-    const [messagesPerPage] = useState(5);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(0);
 
     const ip_linux_virtual = "http://192.168.49.2:30979/";
     const ip_linux = "http://192.168.0.101:8083/";
-   //   const ip_linux = "http://192.168.0.101:8083/";
+      //  const ip_linux = "http://192.168.0.101:8083/";
+      
+      
+    const [messages, setMessages] = useState<MessageModel[]>([]);
 
+    const [messagesPerPage] = useState(5);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
+    
     useEffect(() => {
         const fetchUserMessages = async () => {
 
             if (authState && authState.isAuthenticated) {
-                const url = `${ip_linux}api/messages/search/findByUserEmail?userEmail=${authState.accessToken?.claims.sub}&page${currentPage - 1}&size=${messagesPerPage}`;
+                const url = `${ip_linux}api/messages/search/findByClosed?closed=false&page${currentPage - 1}&size=${messagesPerPage}`;
 
                 const requestOptions = {
                     method: 'GET',
@@ -72,39 +76,21 @@ export const Messages = () => {
 
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-    return(
-        <div className="mt-2">
-            {messages.length > 0 ?
-                <>
-                <h5> Current Q/A: </h5>
-                {messages.map(message => (
-                    <div key={message.id}>
-                        <div className="card mt-2 shadow p-3 bg-body rounded">
-                            <h5>Case #{message.id}: {message.title}</h5>
-                            <h6>{message.userEmail}</h6>
-                            <p>{message.question}</p>
-                            <hr></hr>
-                            <div>
-                                <h5>Response: </h5>
-                                {message.response && message.adminEmail? 
-                                    <>
-                                        <h6>{message.adminEmail} (admin)</h6>
-                                        <p>{message.response}</p>
-                                    </>
-                                    :
-                                    <p><i>Pending response from administration. Please be patient</i></p>
-                                }
-                            </div>
-
-                        </div>
-                    </div>
-                ))}
-                </>
-                :
-                <h5>All questions you submit will be shown here</h5>    
-            }
-            {totalPages > 1 && <Pagination currentPage={currentPage} totalPages={totalPages} paginate={paginate}></Pagination>}
+    return (
+        <div className="mt-3">
+          {messages.length > 0 ? (
+            <>
+              <h5>Pending Q/A</h5>
+              {messages.map((message, index) => (
+                <AdminMessages message={message} key={message.id} />
+              ))}
+            </>
+          ) : (
+            <h5>No pending Q/A</h5>
+          )}
+          {totalPages > 1 && (
+            <Pagination currentPage={currentPage} totalPages={totalPages} paginate={paginate} />
+          )}
         </div>
-        
-    );
+      );
 }

@@ -1,6 +1,7 @@
 import { useOktaAuth } from "@okta/okta-react";
 import { useState } from "react";
 import { HomePage } from "../HomePage/HomePage";
+import { AdminMessage } from "./components/AdminMessages";
 
 export const ManageLibraryPage = () => {
 
@@ -54,7 +55,7 @@ export const ManageLibraryPage = () => {
                        {changeQuantityOfBooksClick ? <>Change Quantity</> : <></>}
                     </div>
                     <div className="tab-pane fade" id="nav-messages" role="tabpanel" area-labelledby="nav-messages">
-                        {messagesClick ? <>Admin Messages</> : <></>}
+                        {messagesClick ? <AdminMessage></AdminMessage> : <></>}
                     </div>
                 </div>
             </div>

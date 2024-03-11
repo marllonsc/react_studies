@@ -16,7 +16,7 @@ import com.luv2code.springbootlibrary.requestmodels.ShelfCurrentLoansResponse;
 import com.luv2code.springbootlibrary.service.BookService;
 import com.luv2code.springbootlibrary.utils.ExtractJWT;
 
-//@CrossOrigin("http://localhost:3000")
+//@CrossOrigin("http://192.168.0.101:3000")
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/books")
