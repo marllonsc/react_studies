@@ -11,8 +11,8 @@ export const PostNewMessage = () => {
     const [displaySuccess, setDisplaySuccess] = useState(false);
 
     const ip_linux_virtual = "http://192.168.49.2:30979/";
-    const ip_linux = "http://192.168.0.101:8083/";
-   //   const ip_linux = "http://192.168.0.101:8083/";
+    const ip_linux = "http://192.168.0.106:8083/";
+   //   const ip_linux = "http://192.168.0.106:8083/";
 
 
     async function submitNewQuestion(){

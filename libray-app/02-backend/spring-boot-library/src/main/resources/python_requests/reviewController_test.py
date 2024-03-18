@@ -1,9 +1,9 @@
 import requests
 
-# Replace the URL with your actual endpoint const ip_linux = "http://192.168.0.101:8083/";
-#url = "http://192.168.0.101:8083/api/reviews/secure"
-#url = "http://192.168.0.101:8083/api/reviews/secure"
-url = "http://192.168.0.101:8083/api/reviews/secure/user/book"
+# Replace the URL with your actual endpoint const ip_linux = "http://192.168.0.106:8083/";
+#url = "http://192.168.0.106:8083/api/reviews/secure"
+#url = "http://192.168.0.106:8083/api/reviews/secure"
+url = "http://192.168.0.106:8083/api/reviews/secure/user/book"
 
 # Replace 'your_token_here' with the actual token value
 token = "eyJraWQiOiJUSTZCN0l1T25LZ1Awalh1Z0xWeTgxTmp4ME9vYmEtcTREalpmNWpvbmxnIiwiYWxnIjoiUlMyNTYifQ.eyJ2ZXIiOjEsImp0aSI6IkFULk9KVzg4N3pqck9ZU1hJWm81QVQ4UERjMnZ6TFZZSmE0dU5ycC1qaTNUYWciLCJpc3MiOiJodHRwczovL2Rldi0wNjMxODkzMC5va3RhLmNvbS9vYXV0aDIvZGVmYXVsdCIsImF1ZCI6ImFwaTovL2RlZmF1bHQiLCJpYXQiOjE3MDU1ODczOTcsImV4cCI6MTcwNTU5MDk5NywiY2lkIjoiMG9hZDRod2s5Z1ZnWHJMU3Y1ZDciLCJ1aWQiOiIwMHVkNGhyMGY3NUcycmlBWDVkNyIsInNjcCI6WyJwcm9maWxlIiwib3BlbmlkIiwiZW1haWwiXSwiYXV0aF90aW1lIjoxNzA1NTgwMjUwLCJzdWIiOiJ0ZXN0dXNlckBlbWFpbC5jb20ifQ.XBukVfMyCV8gmEimXBb0QdiosY2B_Li3J-WYeh6LQu39IcYvg5L6TVYqeVSBfdmFmXnfS3JRFpZsGBuDiD2blflaiTV50cTtzlfevfAYl9MlEnNgl4FUr5o77qoPbwRSde5En5BXv0SNSwfjdiQDDdEzGm2DEH0BuIIY61u0fUFfyuNW150FENcMRqBWpamWKqyzh-6VPvnuGjgkIH-6Rygf2wfbv5qhNvav7e1W0c7GLwj1s82mSk-SYzZc2WFmsIz3T3ooH951RIfaWF6Hbm93LNLPCaGavpcN_PkcR4TDTLWAfRdwE2S6POfuWfz3sfchz7RVbBcs2-WOypdeZA"
